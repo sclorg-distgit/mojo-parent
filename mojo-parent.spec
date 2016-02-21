@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        32
-Release:        4.10%{?dist}
+Release:        4.11%{?dist}
 Summary:        Codehaus MOJO parent project pom file
 
 License:        ASL 2.0
@@ -14,15 +14,15 @@ Source1:        http://www.apache.org/licenses/LICENSE-2.0.txt
 BuildArch:      noarch
 
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:  maven30-codehaus-parent
-BuildRequires:  maven30-maven-enforcer-plugin
+BuildRequires:  %{?scl_prefix}codehaus-parent
+BuildRequires:  %{?scl_prefix}maven-enforcer-plugin
 
 %description
 Codehaus MOJO parent project pom file
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 # Cobertura plugin is executed only during clean Maven phase.
 %pom_remove_plugin :cobertura-maven-plugin
@@ -33,14 +33,14 @@ cp %SOURCE1 .
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_alias : org.codehaus.mojo:mojo
 %mvn_build
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -50,6 +50,9 @@ set -e -x
 %doc LICENSE-2.0.txt
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 32-4.11
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 32-4.10
 - maven33 rebuild
 
