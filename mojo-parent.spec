@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        32
-Release:        4.11%{?dist}
+Release:        4.12%{?dist}
 Summary:        Codehaus MOJO parent project pom file
 
 License:        ASL 2.0
@@ -13,7 +13,7 @@ Source0:        http://repo1.maven.org/maven2/org/codehaus/mojo/%{pkg_name}/%{ve
 Source1:        http://www.apache.org/licenses/LICENSE-2.0.txt
 BuildArch:      noarch
 
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:  %{?scl_prefix}codehaus-parent
 BuildRequires:  %{?scl_prefix}maven-enforcer-plugin
 
@@ -50,6 +50,9 @@ set -e -x
 %doc LICENSE-2.0.txt
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 32-4.12
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 32-4.11
 - maven33 rebuild #2
 
